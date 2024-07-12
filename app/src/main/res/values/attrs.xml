@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ItemDetailsData">
+        <attr name="itemDetailsData_label" format="string|reference" />
+        <attr name="itemDetailsData_value" format="string|reference" />
+    </declare-styleable>
+
+</resources>

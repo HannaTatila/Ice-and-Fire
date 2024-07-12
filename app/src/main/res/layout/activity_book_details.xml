@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".book.presentation.view.BookDetailsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbarBookDetails"
+            style="@style/CustomToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Book Detail" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/containerNestedScrollViewBookDetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:id="@+id/containerDataBookDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.example.iceandfire.ui.ItemDetailsData
+                android:id="@+id/itemDetailsNameBookDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:itemDetailsData_label="Name:" />
+
+            <com.example.iceandfire.ui.ItemDetailsData
+                android:id="@+id/itemDetailsAuthorBookDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:itemDetailsData_label="Author" />
+
+            <com.example.iceandfire.ui.ItemDetailsData
+                android:id="@+id/itemDetailsNumberOfPagesBookDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:itemDetailsData_label="Number Of Pages:" />
+
+            <com.example.iceandfire.ui.ItemDetailsData
+                android:id="@+id/itemDetailsReleasedBookDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:itemDetailsData_label="Released:" />
+
+            <com.example.iceandfire.ui.ItemDetailsData
+                android:id="@+id/itemDetailsPublisherBookDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:itemDetailsData_label="Publisher:" />
+
+            <com.example.iceandfire.ui.ItemDetailsData
+                android:id="@+id/itemDetailsIsbnBookDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:itemDetailsData_label="Isbn" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/loadingBookDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabBookDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:contentDescription="Favoritar"
+        app:layout_anchorGravity="end|bottom"
+        app:srcCompat="@drawable/ic_favorite" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CustomToolbar" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="navigationIcon">@drawable/ic_chevron_left</item>
+        <item name="android:theme">@style/Widget.AppCompat.ActionBar</item>
+        <item name="toolbarNavigationButtonStyle">@style/Widget.AppCompat.Toolbar.Button.Navigation</item>
+    </style>
+
+</resources>

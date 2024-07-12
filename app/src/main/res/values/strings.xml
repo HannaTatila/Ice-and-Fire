@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- General -->
+    <string name="app_name">Ice and Fire</string>
+
+    <!-- Book -->
+    <string name="title_book">Books</string>
+    <string name="title_book_details">Book Details</string>
+
+    <!-- Character -->
+    <string name="title_character">Characters</string>
+
+    <!-- House -->
+    <string name="title_house">Houses</string>
+
+</resources>
