@@ -1,12 +1,11 @@
-package com.example.iceandfire
+package com.example.iceandfire.book.domain.usecase
 
-import com.example.iceandfire.book.domain.model.Book
 import com.example.iceandfire.book.domain.repository.BookRepository
-import com.example.iceandfire.book.domain.usecase.GetBooksUseCase
+import com.example.iceandfire.stub.BookStub
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import kotlin.time.ExperimentalTime
 
@@ -19,11 +18,7 @@ class GetBooksUseCaseTest {
     @Test
     fun `invoke Should return book list When repository call succeeds`() {
         // Given
-        val expectedBooks = listOf(
-            Book(listOf("Author"), "Book 1", "", "", "", "", ""),
-            Book(listOf("Author"), "Book 2", "", "", "", "", ""),
-            Book(listOf("Author"), "Book 3", "", "", "", "", ""),
-        )
+        val expectedBooks = BookStub.generateBookList()
         val resultExpectedBooks = Result.success(expectedBooks)
         coEvery { mockRepository.get() } returns resultExpectedBooks
 
