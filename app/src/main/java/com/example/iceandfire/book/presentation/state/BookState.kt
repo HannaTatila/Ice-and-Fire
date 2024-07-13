@@ -5,24 +5,28 @@ import com.example.iceandfire.book.domain.model.Book
 data class BookState(
     val isLoading: Boolean = true,
     val isContent: Boolean = false,
-    val book: List<Book>? = null
+    val bookList: List<Book>? = null,
+    val isError: Throwable? = null
 ) {
 
     fun showLoading() = copy(
         isLoading = true,
         isContent = false,
-        book = null
+        bookList = null,
+        isError = null
     )
 
     fun setBookSuccess(book: List<Book>) = copy(
         isLoading = false,
         isContent = true,
-        book = book
+        bookList = book,
+        isError = null
     )
 
-    fun setBookError() = copy(
+    fun setBookError(throwable: Throwable) = copy(
         isLoading = false,
         isContent = false,
-        book = null
+        bookList = null,
+        isError = throwable
     )
 }

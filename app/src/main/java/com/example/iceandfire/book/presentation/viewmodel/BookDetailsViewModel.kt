@@ -21,7 +21,7 @@ class BookDetailsViewModel(
             showLoading()
             getBookByIdUseCase(url)
                 .onSuccess { book -> handleSuccess(book) }
-                .onFailure { handleError() }
+                .onFailure { throwable -> handleError(throwable) }
         }
     }
 
@@ -33,11 +33,15 @@ class BookDetailsViewModel(
         _state.value = BookDetailsState().setBookSuccess(book)
     }
 
-    private fun handleError() {
-        TODO("Not yet implemented")
+    private fun handleError(throwable: Throwable) {
+        _state.value = BookDetailsState().setBookError(throwable)
     }
 
     fun onScreenInitialized(url: String) {
+        getBookById(url)
+    }
+
+    fun onRetryClicked(url: String) {
         getBookById(url)
     }
 }

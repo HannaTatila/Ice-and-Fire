@@ -1,6 +1,5 @@
 package com.example.iceandfire.book.presentation.view
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +14,7 @@ import com.example.iceandfire.book.presentation.action.BookAction
 import com.example.iceandfire.book.presentation.adapter.BookListAdapter
 import com.example.iceandfire.book.presentation.model.UrlBookArgs
 import com.example.iceandfire.book.presentation.viewmodel.BookViewModel
+import com.example.iceandfire.core.extensions.showDialogError
 import com.example.iceandfire.databinding.FragmentBookBinding
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -43,9 +43,8 @@ class BookFragment : Fragment() {
                 bookViewModel.state.collect { state ->
                     loadingBook.isVisible = state.isLoading
                     recyclerViewBook.isVisible = state.isContent
-                    state.book?.let { bookList ->
-                        setupBookRecyclerView(bookList)
-                    }
+                    state.bookList?.let { bookList -> setupBookRecyclerView(bookList) }
+                    state.isError?.let { throwable -> showError(throwable.message.orEmpty()) }
                 }
             }
         }
@@ -62,11 +61,7 @@ class BookFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 bookViewModel.action.collect { action ->
-                    when (action) {
-                        is BookAction.NavigateToBookDetails -> navigateToBookDetails(action.url)
-                        is BookAction.ShowError -> showError(action.errorMessage)
-                        else -> {}
-                    }
+                    if (action is BookAction.NavigateToBookDetails) navigateToBookDetails(action.url)
                 }
             }
         }
@@ -80,19 +75,10 @@ class BookFragment : Fragment() {
     }
 
     private fun showError(errorMessage: String) {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Ops!")
-        builder.setMessage("Algo de errado não está certo: $errorMessage")
-        builder.setPositiveButton("Tentar novamente") { dialog, _ ->
+        requireContext().showDialogError(errorMessage) {
             bookViewModel.onRetryClicked()
-            dialog.dismiss()
         }
-
-        val dialog = builder.create()
-        dialog.setCancelable(false)
-        dialog.show()
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

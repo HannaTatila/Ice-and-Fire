@@ -13,6 +13,7 @@ import com.example.iceandfire.book.presentation.model.UrlBookArgs
 import com.example.iceandfire.book.presentation.viewmodel.BookDetailsViewModel
 import com.example.iceandfire.core.extensions.getArguments
 import com.example.iceandfire.core.extensions.putArguments
+import com.example.iceandfire.core.extensions.showDialogError
 import com.example.iceandfire.databinding.ActivityBookDetailsBinding
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,6 +21,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class BookDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBookDetailsBinding
+    private lateinit var args: UrlBookArgs
     private val bookDetailsViewModel: BookDetailsViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +35,7 @@ class BookDetailsActivity : AppCompatActivity() {
     }
 
     private fun setupArguments() {
-        val args = intent.getArguments() as UrlBookArgs
+        args = intent.getArguments() as UrlBookArgs
         bookDetailsViewModel.onScreenInitialized(args.url)
     }
 
@@ -50,9 +52,8 @@ class BookDetailsActivity : AppCompatActivity() {
                     loadingBookDetails.isVisible = state.isLoading
                     fabBookDetails.isVisible = state.isContent
                     containerDataBookDetails.isVisible = state.isContent
-                    state.book?.let { book ->
-                        setBookData(book)
-                    }
+                    state.book?.let { book -> setBookData(book) }
+                    state.isError?.let { throwable -> showError(throwable.message.orEmpty()) }
                 }
             }
         }
@@ -68,6 +69,11 @@ class BookDetailsActivity : AppCompatActivity() {
         itemDetailsNumberOfPagesBookDetail.setValue(book.numberOfPages)
     }
 
+    private fun showError(errorMessage: String) {
+        this.showDialogError(errorMessage) {
+            bookDetailsViewModel.onRetryClicked(args.url)
+        }
+    }
 
     companion object {
         fun newIntent(context: Context, args: UrlBookArgs): Intent {

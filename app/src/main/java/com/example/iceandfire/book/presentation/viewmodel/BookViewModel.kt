@@ -6,12 +6,8 @@ import com.example.iceandfire.book.domain.model.Book
 import com.example.iceandfire.book.domain.usecase.GetBooksUseCase
 import com.example.iceandfire.book.presentation.action.BookAction
 import com.example.iceandfire.book.presentation.state.BookState
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 
 class BookViewModel(
@@ -21,8 +17,8 @@ class BookViewModel(
     private val _state = MutableStateFlow(BookState())
     val state: StateFlow<BookState> get() = _state
 
-    private val _action = MutableSharedFlow<BookAction>(extraBufferCapacity = 1)
-    val action: SharedFlow<BookAction> = _action.asSharedFlow()
+    private val _action = MutableStateFlow<BookAction>(BookAction.None)
+    val action: StateFlow<BookAction> = _action
 
     init {
         getBooks()
@@ -31,7 +27,6 @@ class BookViewModel(
     private fun getBooks() {
         viewModelScope.launch {
             showLoading()
-            delay(3000)
             getBookUseCase()
                 .onSuccess { bookList -> handleSuccess(bookList) }
                 .onFailure { throwable -> handleError(throwable) }
@@ -47,16 +42,15 @@ class BookViewModel(
     }
 
     private fun handleError(throwable: Throwable) {
-        _state.value = BookState().setBookError()
-        _action.tryEmit(BookAction.ShowError(throwable.message ?: ""))
+        _state.value = BookState().setBookError(throwable)
     }
 
     fun onBookItemClicked(url: String) {
-        _action.tryEmit(BookAction.NavigateToBookDetails(url))
+        _action.value = BookAction.NavigateToBookDetails(url)
     }
 
     fun onNavigationActivated() {
-        _action.tryEmit(BookAction.None)
+        _action.value = BookAction.None
     }
 
     fun onRetryClicked() {

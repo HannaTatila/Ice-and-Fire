@@ -1,6 +1,8 @@
 package com.example.iceandfire.core.extensions
 
 import android.accounts.NetworkErrorException
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Parcelable
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.HttpException
@@ -29,4 +31,17 @@ fun Intent.putArguments(data: Parcelable): Intent {
 
 fun Intent.getArguments(): Parcelable? {
     return getParcelableExtra(KEY_ARGUMENTS_DEFAULT)
+}
+
+fun Context.showDialogError(errorMessage: String, onButtonClickListener: () -> Unit) {
+    val builder = AlertDialog.Builder(this)
+    builder.setMessage("Algo de errado não está certo: $errorMessage")
+    builder.setPositiveButton("Tentar novamente") { dialog, _ ->
+        onButtonClickListener.invoke()
+        dialog.dismiss()
+    }
+
+    val dialog = builder.create()
+    dialog.setCancelable(false)
+    dialog.show()
 }
