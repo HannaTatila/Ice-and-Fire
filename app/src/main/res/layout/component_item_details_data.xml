@@ -4,13 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingHorizontal="20dp"
+
     tools:parentTag="android.widget.LinearLayout">
 
     <TextView
         android:id="@+id/textLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/dark_gray"
+        android:paddingVertical="4dp"
+        android:gravity="center"
         android:layout_marginTop="20dp"
         tools:text="@tools:sample/lorem" />
 
@@ -19,8 +22,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:paddingHorizontal="20dp"
+        android:gravity="center"
         android:layout_marginTop="10dp"
-        android:textColor="@color/black"
         tools:text="@tools:sample/lorem" />
 
 </merge>

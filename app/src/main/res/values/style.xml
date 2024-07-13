@@ -3,6 +3,7 @@
 
     <style name="CustomToolbar" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
         <item name="navigationIcon">@drawable/ic_chevron_left</item>
+        <item name="navigationIconTint">?colorAccent</item>
         <item name="android:theme">@style/Widget.AppCompat.ActionBar</item>
         <item name="toolbarNavigationButtonStyle">@style/Widget.AppCompat.Toolbar.Button.Navigation</item>
     </style>

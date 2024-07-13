@@ -17,6 +17,7 @@
             style="@style/CustomToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -46,7 +47,7 @@
                 android:id="@+id/itemDetailsAuthorBookDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:itemDetailsData_label="Author" />
+                app:itemDetailsData_label="Author:" />
 
             <com.example.iceandfire.ui.ItemDetailsData
                 android:id="@+id/itemDetailsNumberOfPagesBookDetail"
@@ -70,7 +71,7 @@
                 android:id="@+id/itemDetailsIsbnBookDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:itemDetailsData_label="Isbn" />
+                app:itemDetailsData_label="Isbn:" />
 
         </LinearLayout>
 
