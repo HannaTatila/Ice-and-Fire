@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.iceandfire.R
 import com.example.iceandfire.book.presentation.view.BookFragment
-import com.example.iceandfire.dashboard.DashboardFragment
+import com.example.iceandfire.character.CharacterFragment
 import com.example.iceandfire.databinding.ActivityIceAndFireBinding
-import com.example.iceandfire.notifications.NotificationsFragment
+import com.example.iceandfire.house.HouseFragment
 
 class IceAndFireActivity : AppCompatActivity() {
 
@@ -31,13 +31,13 @@ class IceAndFireActivity : AppCompatActivity() {
                     true
                 }
 
-                R.id.navigation_dashboard -> {
-                    loadFragment(DashboardFragment())
+                R.id.navigation_character -> {
+                    loadFragment(CharacterFragment())
                     true
                 }
 
-                R.id.navigation_notifications -> {
-                    loadFragment(NotificationsFragment())
+                R.id.navigation_house -> {
+                    loadFragment(HouseFragment())
                     true
                 }
 
