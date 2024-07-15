@@ -2,15 +2,27 @@
 
     <!-- General -->
     <string name="app_name">Ice and Fire</string>
+    <string name="message_generic_error">Ocorreu um erro inesperado: %1$s</string>
+    <string name="text_try_again">Tentar novamente</string>
+    <string name="item_title_format">%1$d. %2$s</string>
 
     <!-- Book -->
     <string name="title_book">Books</string>
-    <string name="title_book_details">Book Details</string>
 
-    <!-- Character -->
+    <!-- Book Details -->
+    <string name="title_book_details">Book Details</string>
+    <string name="favorite_content_description_book_details">Favoritar</string>
+    <string name="name_label_item_book_details">Name:</string>
+    <string name="author_label_item_book_details">Author:</string>
+    <string name="number_of_pages_label_item_book_details">Number Of Pages:</string>
+    <string name="released_label_item_book_details">Released:</string>
+    <string name="publisher_label_item_book_details">Publisher:</string>
+    <string name="isbn_label_item_book_details">Isbn:</string>
+
+    <!-- Characters -->
     <string name="title_character">Characters</string>
 
-    <!-- House -->
+    <!-- Houses -->
     <string name="title_house">Houses</string>
 
 </resources>

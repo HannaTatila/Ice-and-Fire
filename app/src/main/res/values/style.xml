@@ -8,4 +8,16 @@
         <item name="toolbarNavigationButtonStyle">@style/Widget.AppCompat.Toolbar.Button.Navigation</item>
     </style>
 
+    <style name="StyleBodyLarge" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="StyleBodyMedium" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="StyleTitleSmall" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">20sp</item>
+    </style>
+
 </resources>

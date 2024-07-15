@@ -8,7 +8,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarIceAndFire"
         android:layout_width="match_parent"
-        android:layout_height="152dp"
+        android:layout_height="@dimen/height_app_bar_layout_with_collapse"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 

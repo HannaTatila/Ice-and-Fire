@@ -62,11 +62,11 @@ class BookDetailsActivity : AppCompatActivity() {
 
     private fun setBookData(book: Book) = with(binding) {
         itemDetailsNameBookDetail.setValue(book.name)
-        itemDetailsAuthorBookDetail.setValue(book.authors[0])
         itemDetailsIsbnBookDetail.setValue(book.isbn)
         itemDetailsPublisherBookDetail.setValue(book.publisher)
         itemDetailsReleasedBookDetail.setValue(book.released)
         itemDetailsNumberOfPagesBookDetail.setValue(book.numberOfPages)
+        if (book.authors.isNotEmpty()) itemDetailsAuthorBookDetail.setValue(book.authors[0])
     }
 
     private fun showError(errorMessage: String) {

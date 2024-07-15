@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.storage.CacheResetOnProcessCanceled.enabled
-
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -20,14 +18,17 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
+        debug {
+            buildConfigField("String", "API_URL", "\"https://www.anapioficeandfire.com/api/\"")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "API_URL", "\"https://www.anapioficeandfire.com/api/\"")
         }
     }
     compileOptions {
@@ -39,11 +40,18 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
+    }
+    packagingOptions {
+        resources {
+            excludes += "META-INF/LICENSE.md"
+            excludes += "META-INF/LICENSE-notice.md"
+        }
     }
 }
 
 dependencies {
-    // Core
+    // General
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -74,8 +82,6 @@ dependencies {
     implementation(libs.adapter.rxjava2)
     implementation(libs.retrofit2.kotlin.coroutines.adapter)
     implementation(libs.gson)
-    implementation(libs.firebase.crashlytics.buildtools)
-    implementation(libs.androidx.activity)
 
     // Unit Test
     testImplementation(libs.junit)
@@ -85,4 +91,6 @@ dependencies {
     // Instrumentation Test
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.mockk)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
 }

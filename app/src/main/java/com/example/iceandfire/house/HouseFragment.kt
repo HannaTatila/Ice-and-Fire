@@ -9,7 +9,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.iceandfire.databinding.FragmentCharacterBinding
 import com.example.iceandfire.databinding.FragmentHouseBinding
 import kotlinx.coroutines.launch
 

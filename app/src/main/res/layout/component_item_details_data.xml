@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-
     tools:parentTag="android.widget.LinearLayout">
 
     <TextView
@@ -12,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/dark_gray"
+        style="@style/StyleBodyLarge"
         android:paddingVertical="4dp"
         android:gravity="center"
         android:layout_marginTop="20dp"
@@ -22,7 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:paddingHorizontal="20dp"
+        style="@style/StyleBodyMedium"
+        android:paddingHorizontal="@dimen/margin_horizontal_default"
         android:gravity="center"
         android:layout_marginTop="10dp"
         tools:text="@tools:sample/lorem" />

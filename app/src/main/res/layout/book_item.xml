@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
+    android:layout_marginHorizontal="@dimen/margin_horizontal_default"
     android:layout_marginVertical="3dp"
     android:orientation="vertical"
     app:cardBackgroundColor="@color/dark_gray"
-    app:cardCornerRadius="6dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="@dimen/card_elevation">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,16 +20,16 @@
         <TextView
             android:id="@+id/textTitleBook"
             android:layout_width="0dp"
+            style="@style/StyleBodyMedium"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_weight="1"
-            android:textSize="16sp"
             tools:text="@tools:sample/lorem" />
 
         <ImageView
             android:id="@+id/imageFavoriteBook"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="@dimen/icon_size_small"
+            android:layout_height="@dimen/icon_size_small"
             android:layout_gravity="center"
             android:layout_marginHorizontal="16dp"
             android:importantForAccessibility="no"
@@ -38,8 +38,8 @@
 
         <ImageView
             android:id="@+id/imageArrowBook"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="@dimen/icon_size_small"
+            android:layout_height="@dimen/icon_size_small"
             android:layout_gravity="center"
             android:importantForAccessibility="no"
             app:srcCompat="@drawable/ic_chevron_right"

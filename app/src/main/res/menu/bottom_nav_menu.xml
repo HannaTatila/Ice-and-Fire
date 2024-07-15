@@ -8,14 +8,14 @@
         android:title="@string/title_book" />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.iceandfire.presentation.dashboard.DashboardFragment"
+        android:id="@+id/navigation_character"
+        android:name="com.example.iceandfire.presentation.character.CharacterFragment"
         android:icon="@drawable/ic_character_nav"
         android:title="@string/title_character" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.iceandfire.presentation.notifications.NotificationsFragment"
+        android:id="@+id/navigation_house"
+        android:name="com.example.iceandfire.presentation.house.HouseFragment"
         android:icon="@drawable/ic_house_nav"
         android:title="@string/title_house" />
 

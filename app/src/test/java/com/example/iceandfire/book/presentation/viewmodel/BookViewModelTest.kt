@@ -32,7 +32,6 @@ class BookViewModelTest {
     @Before
     fun setup() {
         Dispatchers.setMain(testDispatcher)
-
     }
 
     @Test

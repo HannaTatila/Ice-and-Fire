@@ -21,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="Book Detail" />
+            app:title="@string/title_book_details" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -41,37 +41,37 @@
                 android:id="@+id/itemDetailsNameBookDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:itemDetailsData_label="Name:" />
+                app:itemDetailsData_label="@string/name_label_item_book_details" />
 
             <com.example.iceandfire.ui.ItemDetailsData
                 android:id="@+id/itemDetailsAuthorBookDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:itemDetailsData_label="Author:" />
+                app:itemDetailsData_label="@string/author_label_item_book_details" />
 
             <com.example.iceandfire.ui.ItemDetailsData
                 android:id="@+id/itemDetailsNumberOfPagesBookDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:itemDetailsData_label="Number Of Pages:" />
+                app:itemDetailsData_label="@string/number_of_pages_label_item_book_details" />
 
             <com.example.iceandfire.ui.ItemDetailsData
                 android:id="@+id/itemDetailsReleasedBookDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:itemDetailsData_label="Released:" />
+                app:itemDetailsData_label="@string/released_label_item_book_details" />
 
             <com.example.iceandfire.ui.ItemDetailsData
                 android:id="@+id/itemDetailsPublisherBookDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:itemDetailsData_label="Publisher:" />
+                app:itemDetailsData_label="@string/publisher_label_item_book_details" />
 
             <com.example.iceandfire.ui.ItemDetailsData
                 android:id="@+id/itemDetailsIsbnBookDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:itemDetailsData_label="Isbn:" />
+                app:itemDetailsData_label="@string/isbn_label_item_book_details" />
 
         </LinearLayout>
 
@@ -95,8 +95,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        android:contentDescription="Favoritar"
+        android:contentDescription="@string/favorite_content_description_book_details"
         app:layout_anchorGravity="end|bottom"
+        app:tint="?colorSecondaryVariant"
         app:srcCompat="@drawable/ic_favorite" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
