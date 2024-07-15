@@ -1,5 +1,5 @@
 # Ice and Fire
-Ice and Fire é uma aplicação Android que traz informações sobre os livros, personganes e casas do universo Ice and Fire.
+Ice and Fire é uma aplicação Android que traz informações sobre os livros, personagenss e casas do universo Gelo e Fogo.
 <br>
 Para mais informações sobre a API: 
 - https://anapioficeandfire.com/
@@ -26,6 +26,7 @@ Clone ou faça o download do projeto.
 <br><br>
 
 # Próximos passos
-- Modularização
-- Paginação
-- Armazenamento local
+- Implementar também as listagens de personagens e casas
+- Aplicar modularização utilizando a abordagem de modularização por features
+- Aplicar paginação utilizando Paging 3
+- Criar armazenamento local utilizando o Room para salvar e listar os favoritos
