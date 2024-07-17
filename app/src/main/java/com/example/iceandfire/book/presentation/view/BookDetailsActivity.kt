@@ -20,13 +20,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BookDetailsActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityBookDetailsBinding
+    private val binding: ActivityBookDetailsBinding by lazy {
+        ActivityBookDetailsBinding.inflate(layoutInflater)
+    }
     private lateinit var args: UrlBookArgs
     private val bookDetailsViewModel: BookDetailsViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityBookDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupArguments()

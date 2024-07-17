@@ -1,13 +1,15 @@
 package com.example.iceandfire.book.data.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class BookResponse(
-    @SerializedName("authors") val authors: List<String>? = null,
-    @SerializedName("isbn") val isbn: String? = null,
-    @SerializedName("name") val name: String? = null,
-    @SerializedName("numberOfPages") val numberOfPages: Int? = null,
-    @SerializedName("publisher") val publisher: String? = null,
-    @SerializedName("released") val released: String? = null,
-    @SerializedName("url") val url: String? = null
+    @SerialName("authors") val authors: List<String>?,
+    @SerialName("isbn") val isbn: String?,
+    @SerialName("name") val name: String?,
+    @SerialName("numberOfPages") val numberOfPages: Int?,
+    @SerialName("publisher") val publisher: String?,
+    @SerialName("released") val released: String?,
+    @SerialName("url") val url: String?
 )

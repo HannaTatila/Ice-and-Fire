@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
+    kotlin("plugin.serialization")
 }
 
 android {
@@ -78,10 +79,12 @@ dependencies {
 
     // Retrofit
     implementation(libs.retrofit)
-    implementation(libs.converter.gson)
     implementation(libs.adapter.rxjava2)
     implementation(libs.retrofit2.kotlin.coroutines.adapter)
     implementation(libs.gson)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.okhttp)
 
     // Unit Test
     testImplementation(libs.junit)
