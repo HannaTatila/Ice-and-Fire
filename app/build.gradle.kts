@@ -43,7 +43,7 @@ android {
         viewBinding = true
         buildConfig = true
     }
-    packagingOptions {
+    packaging {
         resources {
             excludes += "META-INF/LICENSE.md"
             excludes += "META-INF/LICENSE-notice.md"

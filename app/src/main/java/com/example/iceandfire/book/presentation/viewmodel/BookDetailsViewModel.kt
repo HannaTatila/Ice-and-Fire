@@ -24,7 +24,6 @@ class BookDetailsViewModel(
 
     private fun getBookById(url: String) {
         viewModelScope.launch {
-            showLoading()
             getBookByIdUseCase(url)
                 .flowOn(dispatcher)
                 .onStart { showLoading() }
