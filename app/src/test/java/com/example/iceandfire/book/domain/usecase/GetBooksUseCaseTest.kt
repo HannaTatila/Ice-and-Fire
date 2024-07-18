@@ -1,10 +1,13 @@
 package com.example.iceandfire.book.domain.usecase
 
+import app.cash.turbine.test
 import com.example.iceandfire.book.domain.repository.BookRepository
 import com.example.iceandfire.stub.BookStub
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import kotlin.time.ExperimentalTime
@@ -16,30 +19,34 @@ class GetBooksUseCaseTest {
     private val getBooksUseCase = GetBooksUseCase(mockRepository)
 
     @Test
-    fun `invoke Should return book list When repository call succeeds`() {
+    fun `invoke Should return book list When repository call succeeds`() = runTest {
         // Given
         val expectedBooks = BookStub.generateBookList()
-        val resultExpectedBooks = Result.success(expectedBooks)
-        coEvery { mockRepository.get() } returns resultExpectedBooks
+        coEvery { mockRepository.getBooks() } returns flowOf(expectedBooks)
 
         // When
-        val result = runBlocking { getBooksUseCase.invoke() }
+        val result = getBooksUseCase.invoke()
 
         // Then
-        assertEquals(resultExpectedBooks, result)
+        result.test {
+            assertEquals(expectedBooks, awaitItem())
+            awaitComplete()
+        }
     }
 
     @Test
-    fun `when repository returns error then return error`() {
+    fun `when repository returns error then return error`() = runTest {
         // Given
-        val error = Exception("Repository error")
-        val resultError: Result<Throwable> = Result.failure(error)
-        coEvery { mockRepository.get() } returns Result.failure(error)
+        val messageError = "Test Error"
+        coEvery { mockRepository.getBooks() } returns flow { throw RuntimeException(messageError) }
 
         // When
-        val result = runBlocking { getBooksUseCase.invoke() }
+        val result = getBooksUseCase.invoke()
 
         // Then
-        assertEquals(resultError, result)
+        result.test {
+            assertEquals(messageError, awaitError().message)
+            awaitError()
+        }
     }
 }

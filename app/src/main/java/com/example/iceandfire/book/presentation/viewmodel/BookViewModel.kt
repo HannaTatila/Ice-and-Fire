@@ -6,12 +6,18 @@ import com.example.iceandfire.book.domain.model.Book
 import com.example.iceandfire.book.domain.usecase.GetBooksUseCase
 import com.example.iceandfire.book.presentation.action.BookAction
 import com.example.iceandfire.book.presentation.state.BookState
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class BookViewModel(
-    private val getBookUseCase: GetBooksUseCase
+    private val getBookUseCase: GetBooksUseCase,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(BookState())
@@ -26,10 +32,11 @@ class BookViewModel(
 
     private fun getBooks() {
         viewModelScope.launch {
-            showLoading()
             getBookUseCase()
-                .onSuccess { bookList -> handleSuccess(bookList) }
-                .onFailure { throwable -> handleError(throwable) }
+                .flowOn(dispatcher)
+                .onStart { showLoading() }
+                .catch { throwable -> handleError(throwable) }
+                .collect { bookList -> handleSuccess(bookList) }
         }
     }
 

@@ -11,12 +11,12 @@ import com.example.iceandfire.house.HouseFragment
 
 class IceAndFireActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityIceAndFireBinding
+    private val binding: ActivityIceAndFireBinding by lazy {
+        ActivityIceAndFireBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityIceAndFireBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupBottomNavigationView()

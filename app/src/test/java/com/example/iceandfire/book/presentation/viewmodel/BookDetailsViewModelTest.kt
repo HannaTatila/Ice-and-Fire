@@ -1,21 +1,22 @@
 package com.example.iceandfire.book.presentation.viewmodel
 
+import app.cash.turbine.test
+import com.example.iceandfire.CoroutinesTestRule
 import com.example.iceandfire.book.domain.usecase.GetBookByIdUseCase
 import com.example.iceandfire.book.presentation.state.BookDetailsState
 import com.example.iceandfire.stub.BookStub
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.Dispatchers
+import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertFalse
+import junit.framework.TestCase.assertNotNull
+import junit.framework.TestCase.assertNull
+import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.toList
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.TestScope
-import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
-import org.junit.Assert
-import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 private const val URL_TEST_DEFAULT = "url_test"
@@ -23,58 +24,60 @@ private const val URL_TEST_DEFAULT = "url_test"
 @ExperimentalCoroutinesApi
 class BookDetailsViewModelTest {
 
+    @get: Rule
+    val coroutinesTestRule = CoroutinesTestRule()
     private val useCase: GetBookByIdUseCase = mockk(relaxed = true)
     private lateinit var viewModel: BookDetailsViewModel
-    private val testDispatcher = StandardTestDispatcher()
-    private var testScope = TestScope(testDispatcher)
-
-    @Before
-    fun setup() {
-        Dispatchers.setMain(testDispatcher)
-        viewModel = BookDetailsViewModel(useCase)
-    }
 
     @Test
     fun `onScreenInitialized should get book with specific url`() = runTest {
         // Given
         val book = BookStub.generateBook()
-        coEvery { useCase.invoke(URL_TEST_DEFAULT) } returns Result.success(book)
-
-        val stateChanges = mutableListOf<BookDetailsState>()
-        testScope.launch { viewModel.state.toList(stateChanges) }
+        coEvery { useCase.invoke(URL_TEST_DEFAULT) } returns flowOf(book)
 
         // When
+        createViewModel()
         viewModel.onScreenInitialized(URL_TEST_DEFAULT)
-        testScope.advanceUntilIdle()
 
         // Then
-        val expectedStates = listOf(
-            BookDetailsState().showLoading(),
-            BookDetailsState().setBookSuccess(book)
-        )
-
-        Assert.assertEquals(expectedStates, stateChanges)
+        viewModel.state.test {
+            assertEquals(awaitItem(), BookDetailsState().showLoading())
+            assertEquals(awaitItem(), BookDetailsState().setBookSuccess(book))
+        }
     }
 
 
     @Test
     fun `given failure response when getBookById called then state shows error`() = runTest {
         // Given
-        val throwable = Exception("Error")
-        coEvery { useCase(any()) } returns Result.failure(throwable)
-
-        val stateChanges = mutableListOf<BookDetailsState>()
-        testScope.launch { viewModel.state.toList(stateChanges) }
+        val messageError = "Test Error"
+        coEvery { useCase(any()) } returns flow { throw RuntimeException(messageError) }
 
         // When
+        createViewModel()
         viewModel.onScreenInitialized(URL_TEST_DEFAULT)
-        testScope.advanceUntilIdle()
 
         // Then
-        val expectedStates = listOf(
-            BookDetailsState().showLoading(),
-            BookDetailsState().setBookError(throwable)
+        viewModel.state.test {
+            val loadingState = awaitItem()
+            assertTrue(loadingState.isLoading)
+            assertFalse(loadingState.isContent)
+            assertNull(loadingState.book)
+            assertNull(loadingState.isError)
+
+            val errorState = awaitItem()
+            assertFalse(errorState.isLoading)
+            assertFalse(errorState.isContent)
+            assertNull(errorState.book)
+            assertNotNull(errorState.isError)
+            assertEquals(messageError, errorState.isError?.message)
+        }
+    }
+
+    private fun createViewModel() {
+        viewModel = BookDetailsViewModel(
+            useCase,
+            coroutinesTestRule.standardTestDispatcher
         )
-        Assert.assertEquals(expectedStates, stateChanges)
     }
 }

@@ -1,27 +1,12 @@
 package com.example.iceandfire.core.extensions
 
-import android.accounts.NetworkErrorException
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Parcelable
 import com.example.iceandfire.R
-import java.io.IOException
 
 private const val KEY_ARGUMENTS_DEFAULT = "DATA_KEY"
-
-suspend fun <T> safeApiCall(apiCall: suspend () -> T): Result<T> {
-    return try {
-        val response = apiCall()
-        Result.success(response)
-    } catch (throwable: Throwable) {
-        when (throwable) {
-            is IOException -> Result.failure(throwable)
-            is NetworkErrorException -> Result.failure(throwable)
-            else -> Result.failure(Exception("Erro desconhecido"))
-        }
-    }
-}
 
 fun Intent.putArguments(data: Parcelable): Intent {
     putExtra(KEY_ARGUMENTS_DEFAULT, data)

@@ -5,12 +5,18 @@ import androidx.lifecycle.viewModelScope
 import com.example.iceandfire.book.domain.model.Book
 import com.example.iceandfire.book.domain.usecase.GetBookByIdUseCase
 import com.example.iceandfire.book.presentation.state.BookDetailsState
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class BookDetailsViewModel(
-    private val getBookByIdUseCase: GetBookByIdUseCase
+    private val getBookByIdUseCase: GetBookByIdUseCase,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(BookDetailsState())
@@ -20,8 +26,10 @@ class BookDetailsViewModel(
         viewModelScope.launch {
             showLoading()
             getBookByIdUseCase(url)
-                .onSuccess { book -> handleSuccess(book) }
-                .onFailure { throwable -> handleError(throwable) }
+                .flowOn(dispatcher)
+                .onStart { showLoading() }
+                .catch { throwable -> handleError(throwable) }
+                .collect { book -> handleSuccess(book) }
         }
     }
 
