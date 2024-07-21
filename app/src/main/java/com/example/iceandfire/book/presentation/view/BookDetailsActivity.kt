@@ -20,11 +20,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BookDetailsActivity : AppCompatActivity() {
 
+    private val bookDetailsViewModel: BookDetailsViewModel by viewModel()
+    private val args: UrlBookArgs by lazy { intent.getArguments() as UrlBookArgs }
     private val binding: ActivityBookDetailsBinding by lazy {
         ActivityBookDetailsBinding.inflate(layoutInflater)
     }
-    private lateinit var args: UrlBookArgs
-    private val bookDetailsViewModel: BookDetailsViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,6 @@ class BookDetailsActivity : AppCompatActivity() {
     }
 
     private fun setupArguments() {
-        args = intent.getArguments() as UrlBookArgs
         bookDetailsViewModel.onScreenInitialized(args.url)
     }
 
@@ -58,7 +57,6 @@ class BookDetailsActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
 
     private fun setBookData(book: Book) = with(binding) {

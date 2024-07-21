@@ -6,21 +6,13 @@ import com.example.iceandfire.core.util.formatDate
 
 class BookMapper {
 
-    fun map(source: List<BookResponse>): List<Book> {
+    fun toBookList(source: List<BookResponse>): List<Book> {
         return source.map { bookResponse ->
-            Book(
-                authors = bookResponse.authors.orEmpty(),
-                isbn = bookResponse.isbn.orEmpty(),
-                name = bookResponse.name.orEmpty(),
-                numberOfPages = (bookResponse.numberOfPages ?: String()).toString(),
-                publisher = bookResponse.publisher.orEmpty(),
-                released = formatDate(bookResponse.released.orEmpty()),
-                url = bookResponse.url.orEmpty()
-            )
+            toBook(bookResponse)
         }
     }
 
-    fun map(source: BookResponse): Book {
+    fun toBook(source: BookResponse): Book {
         return Book(
             authors = source.authors.orEmpty(),
             isbn = source.isbn.orEmpty(),

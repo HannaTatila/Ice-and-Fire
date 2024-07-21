@@ -5,9 +5,9 @@ import com.example.iceandfire.book.data.service.BookService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class BookLocalDataSourceImpl(
+class BookRemoteDataSourceImpl(
     private val bookService: BookService
-) : BookLocalDataSource {
+) : BookRemoteDataSource {
 
     override fun getBooks(): Flow<List<BookResponse>> {
         return flow { emit(bookService.getBookList()) }

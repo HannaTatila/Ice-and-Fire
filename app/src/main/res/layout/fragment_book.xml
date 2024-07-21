@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="5"
-        tools:listitem="@layout/book_item" />
+        tools:listitem="@layout/item_main_list" />
 
     <ProgressBar
         android:id="@+id/loadingBook"

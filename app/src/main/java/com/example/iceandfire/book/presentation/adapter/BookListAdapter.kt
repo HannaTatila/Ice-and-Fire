@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iceandfire.R
 import com.example.iceandfire.book.domain.model.Book
-import com.example.iceandfire.databinding.BookItemBinding
+import com.example.iceandfire.databinding.ItemMainListBinding
 
 class BookListAdapter(
     private val bookList: List<Book>,
@@ -13,7 +13,7 @@ class BookListAdapter(
 ) : RecyclerView.Adapter<BookListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = BookItemBinding.inflate(
+        val binding = ItemMainListBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
         return ViewHolder(binding)
@@ -25,7 +25,7 @@ class BookListAdapter(
         holder.bind(bookList[position], position)
     }
 
-    inner class ViewHolder(private val bookBinding: BookItemBinding) :
+    inner class ViewHolder(private val bookBinding: ItemMainListBinding) :
         RecyclerView.ViewHolder(bookBinding.root) {
         fun bind(book: Book, position: Int) = with(bookBinding) {
             textTitleBook.text =
@@ -34,6 +34,5 @@ class BookListAdapter(
                 onBookItemClickListener.invoke(book.url)
             }
         }
-
     }
 }

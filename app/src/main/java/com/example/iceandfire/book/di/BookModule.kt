@@ -1,6 +1,6 @@
 package com.example.iceandfire.book.di
 
-import com.example.iceandfire.book.data.datasource.BookLocalDataSourceImpl
+import com.example.iceandfire.book.data.datasource.BookRemoteDataSourceImpl
 import com.example.iceandfire.book.data.mapper.BookMapper
 import com.example.iceandfire.book.data.repository.BookRepositoryImpl
 import com.example.iceandfire.book.data.service.BookService
@@ -28,10 +28,10 @@ val bookModule = module {
 
     factory<BookRepository> {
         BookRepositoryImpl(
-            localDataSource = BookLocalDataSourceImpl(
+            bookRemoteDataSource = BookRemoteDataSourceImpl(
                 bookService = IceAndFireApiService.buildService(BookService::class.java)
             ),
-            mapper = BookMapper()
+            bookMapper = BookMapper()
         )
     }
 }
