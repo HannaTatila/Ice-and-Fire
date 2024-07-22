@@ -61,6 +61,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.kotlin.stdlib)
 
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+
     // Koin
     implementation(libs.koin.core)
     implementation(libs.koin.android)
@@ -68,9 +72,8 @@ dependencies {
     implementation(libs.koin.androidx.viewmodel)
     implementation(libs.koin.androidx.fragment)
 
-    // Coroutines
-    implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.kotlinx.coroutines.android)
+    // Paging
+    implementation(libs.androidx.paging.runtime.ktx)
 
     // Retrofit
     implementation(libs.retrofit)

@@ -2,6 +2,7 @@ package com.example.iceandfire
 
 import android.app.Application
 import com.example.iceandfire.book.di.bookModule
+import com.example.iceandfire.house.di.houseModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -12,7 +13,7 @@ class MyApplication : Application() {
 
         startKoin {
             androidContext(this@MyApplication)
-            modules(bookModule)
+            modules(bookModule, houseModule)
         }
     }
 }

@@ -4,18 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".house.HouseFragment">
+    tools:context=".house.presentation.view.HouseFragment">
 
-    <TextView
-        android:id="@+id/textHouse"
-        style="@style/StyleTitleSmall"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewHouse"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="5"
+        tools:listitem="@layout/item_main_list" />
+
+    <ProgressBar
+        android:id="@+id/loadingHouse"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_horizontal_default"
-        android:textAlignment="center"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabBackToTopHouse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/back_to_top_content_description"
+        android:src="@drawable/ic_arrow_up"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="?colorSecondaryVariant" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/contentHouse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="recyclerViewHouse, fabBackToTopHouse"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

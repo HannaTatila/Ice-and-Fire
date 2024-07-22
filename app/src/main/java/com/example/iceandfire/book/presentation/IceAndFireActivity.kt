@@ -7,7 +7,7 @@ import com.example.iceandfire.R
 import com.example.iceandfire.book.presentation.view.BookFragment
 import com.example.iceandfire.character.CharacterFragment
 import com.example.iceandfire.databinding.ActivityIceAndFireBinding
-import com.example.iceandfire.house.HouseFragment
+import com.example.iceandfire.house.presentation.view.HouseFragment
 
 class IceAndFireActivity : AppCompatActivity() {
 
